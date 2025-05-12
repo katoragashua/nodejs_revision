@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "genre": "Classic"
+  },
+  {
+    "id": 2,
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "genre": "Historical Fiction"
+  },
+  {
+    "id": 3,
+    "title": "1984",
+    "author": "George Orwell",
+    "genre": "Dystopian"
+  },
+  {
+    "id": 4,
+    "title": "Sapiens: A Brief History of Humankind",
+    "author": "Yuval Noah Harari",
+    "genre": "Non-Fiction"
+  },
+  {
+    "id": 5,
+    "title": "The Pragmatic Programmer",
+    "author": "Andrew Hunt, David Thomas",
+    "genre": "Technology"
+  },
+  {
+    "id": 6,
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "author": "J.K. Rowling",
+    "genre": "Fantasy"
+  },
+  {
+    "id": 7,
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "genre": "Self-Improvement"
+  },
+  {
+    "id": 8,
+    "title": "The Lean Startup",
+    "author": "Eric Ries",
+    "genre": "Business"
+  },
+  {
+    "id": 9,
+    "title": "Murder on the Orient Express",
+    "author": "Agatha Christie",
+    "genre": "Mystery"
+  },
+  {
+    "id": 10,
+    "title": "Dune",
+    "author": "Frank Herbert",
+    "genre": "Science Fiction"
+  },
+  {
+    "id": 11,
+    "title": "I think, and I Play",
+    "author": "Andrea Pirlo",
+    "genre": "Sport"
+  }
+]

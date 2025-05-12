@@ -1,0 +1,68 @@
+[
+    {
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "genre": "Classic",
+      "year": 1925
+    },
+    {
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "genre": "Historical Fiction",
+      "year": 1960
+    },
+    {
+      "title": "1984",
+      "author": "George Orwell",
+      "genre": "Dystopian",
+      "year": 1949
+    },
+    {
+      "title": "Sapiens: A Brief History of Humankind",
+      "author": "Yuval Noah Harari",
+      "genre": "Non-Fiction",
+      "year": 2011
+    },
+    {
+      "title": "The Pragmatic Programmer",
+      "author": "Andrew Hunt, David Thomas",
+      "genre": "Technology",
+      "year": 1999
+    },
+    {
+      "title": "Harry Potter and the Sorcerer's Stone",
+      "author": "J.K. Rowling",
+      "genre": "Fantasy",
+      "year": 1997
+    },
+    {
+      "title": "Atomic Habits",
+      "author": "James Clear",
+      "genre": "Self-Improvement",
+      "year": 2018
+    },
+    {
+      "title": "The Lean Startup",
+      "author": "Eric Ries",
+      "genre": "Business",
+      "year": 2011
+    },
+    {
+      "title": "Murder on the Orient Express",
+      "author": "Agatha Christie",
+      "genre": "Mystery",
+      "year": 1934
+    },
+    {
+      "title": "Dune",
+      "author": "Frank Herbert",
+      "genre": "Science Fiction",
+      "year": 1965
+    },
+    {
+      "title": "I think, and I Play",
+      "author": "Andrea Pirlo",
+      "genre": "Sport",
+      "year": 2013
+    }
+  ]

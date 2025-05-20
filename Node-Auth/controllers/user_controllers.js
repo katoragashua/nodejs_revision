@@ -1,5 +1,6 @@
 const User = require("../models/User");
 
+// This function is used to register a new user
 const registerUser = async (req, res) => {
   const { username, email, password } = req.body;
   if (!username || !email || !password)
@@ -14,8 +15,12 @@ const registerUser = async (req, res) => {
         .status(400)
         .json({ message: "User with this email already exists" });
     }
+
     // Check if the username already exists
     const existingUsername = await User.findOne({ username });
+    if (existingUsername) {
+      return res.status(400).json({ message: "Username already exists" });
+    }
     const user = User.create({ username, email, password });
 
     return res
@@ -24,6 +29,43 @@ const registerUser = async (req, res) => {
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+// This function is used to login a user
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ message: "Please provide all required fields" });
+  }
+
+  try {
+    // Check if the user exists
+    // Check if the user exists with the email or username
+    const user = await User.findOne({ email }) || await User.findOne({ username: email });
+    if (!user) {
+      return res.status(400).json({ message: "Invalid email or password" });
+    }
+
+    // Check if the password is correct
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid email or password" });
+    }
+
+    // Generate a token
+    const token = user.generateAuthToken();
+    // Send the token in the response
+    return res.status(200).json({
+      success: true,
+      message: "User logged in successfully",
+      token,
+    });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+    
   }
 };
 

@@ -1,4 +1,12 @@
 const User = require("../models/User");
+const crypto = require("node:crypto");
+const jwt = require("jsonwebtoken");
+
+const signJWT = async (payload) => {
+  return await jwt.sign(payload, process.env.JWT_SECRET, {
+    expiresIn: 15 * 60000, // 15 minutes
+  });
+};
 
 // This function is used to register a new user
 const registerUser = async (req, res) => {
@@ -21,7 +29,7 @@ const registerUser = async (req, res) => {
     if (existingUsername) {
       return res.status(400).json({ message: "Username already exists" });
     }
-    const user = User.create({ username, email, password });
+    const user = await User.create({ username, email, password });
 
     return res
       .status(201)
@@ -36,13 +44,17 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    return res.status(400).json({ message: "Please provide all required fields" });
+    return res
+      .status(400)
+      .json({ message: "Please provide all required fields" });
   }
 
   try {
     // Check if the user exists
     // Check if the user exists with the email or username
-    const user = await User.findOne({ email }) || await User.findOne({ username: email });
+    const user =
+      (await User.findOne({ email })) ||
+      (await User.findOne({ username: email }));
     if (!user) {
       return res.status(400).json({ message: "Invalid email or password" });
     }
@@ -53,22 +65,27 @@ const loginUser = async (req, res) => {
       return res.status(400).json({ message: "Invalid email or password" });
     }
 
-    // Generate a token
-    const token = user.generateAuthToken();
+    // Generate an  access token using JWT
+    const payload = {
+      id: user._id,
+      username: user.username,
+      email: user.email,
+    };
+    const token = await signJWT(payload);
     // Send the token in the response
+
     return res.status(200).json({
       success: true,
       message: "User logged in successfully",
       token,
     });
-
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Internal server error" });
-    
   }
 };
 
 module.exports = {
   registerUser,
+  loginUser,
 };

@@ -11,6 +11,12 @@ const UserSchema = new Schema(
       minLength: [2, "Username must be more than one character."],
       trim: true,
       unique: true,
+      validate: {
+        validator: function (v) {
+          return v.split(" ").length === 1;
+        },
+        message: "Username must not contain spaces.",
+      },
     },
     email: {
       type: String,

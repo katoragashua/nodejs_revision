@@ -36,7 +36,7 @@ const registerUser = async (req, res) => {
       .json({ success: true, message: "User registered successfully", user });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({success: false, message: error.message });
   }
 };
 
@@ -70,6 +70,7 @@ const loginUser = async (req, res) => {
       id: user._id,
       username: user.username,
       email: user.email,
+      role: user.role,
     };
     const token = await signJWT(payload);
     // Send the token in the response
@@ -85,7 +86,47 @@ const loginUser = async (req, res) => {
   }
 };
 
+const changePassword = async (req, res) => {
+  const userId = req.user.id;
+  if (!userId)
+    return res
+      .status(400)
+      .json({
+        success: false,
+        message: "User not authenticated. You need to login",
+      });
+  const { oldPassword, newPassword } = req.body;
+  if (!oldPassword || !newPassword)
+    return res
+      .status(400)
+      .json({
+        success: false,
+        message: "Please enter your old and new password.",
+      });
+  try {
+    const user = await User.findOne({ _id: userId });
+    if (!user)
+      return res
+        .status(400)
+        .json({ success: false, message: "User not found." });
+    const isMatch = await user.comparePassword(oldPassword, user.password);
+    if (!isMatch)
+      return res
+        .status(400)
+        .json({ success: false, message: "Password is incorrect." });
+    user.password = newPassword;
+    await user.save();
+    return res
+      .status(200)
+      .json({ success: true, message: "Password changed successfully." });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: false, error});
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
+  changePassword,
 };

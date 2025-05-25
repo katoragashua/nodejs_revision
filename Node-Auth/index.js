@@ -1,9 +1,8 @@
 const { createServer } = require("node:http");
 const { config } = require("dotenv");
+config();
 const app = require("./app");
 const { connectDB } = require("./mongo/mongo_connect");
-
-config();
 const PORT = process.env.PORT || 3000;
 
 const server = createServer();

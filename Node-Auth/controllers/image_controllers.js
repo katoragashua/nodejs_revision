@@ -1,5 +1,8 @@
 const Image = require("../models/Image");
-const { upload } = require("../utils/cloudinary");
+const {
+  upload,
+  deleteImage: deleteImageFromCloudinary,
+} = require("../utils/cloudinary");
 const fs = require("fs");
 const checkPermissions = require("../utils/checkPermissions");
 
@@ -39,10 +42,73 @@ const uploadImage = async (req, res) => {
   }
 };
 
+// Get images
+const getAllImages = async (req, res) => {
+  const per_page = parseInt(req.query.per_page) || 10; // Default to 10 images per page
+  const page = parseInt(req.query.page) || 1; // Default to page 1
+  const skip = (page - 1) * per_page;
+  const sort = req.query.sort || "createdAt"; // Default sort by createdAt
+  const order = req.query.order === "asc" ? 1 : -1; // Default order is descending
+  const sortObj = {};
+  sortObj[sort] = order;
+
+  // const validSortFields = ["createdAt", "updatedAt", "url"]; // Add other fields if needed
+  // // Validate sort field
+  // if (!validSortFields.includes(sort)) {
+  //   return res.status(400).json({
+  //     success: false,
+  //     message: `Invalid sort field. Valid fields are: ${validSortFields.join(", ")}`,
+  //   });
+  // }
+
+  // Validate pagination parameters
+  if (isNaN(per_page) || isNaN(page) || per_page <= 0 || page <= 0) {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid pagination parameters",
+    });
+  }
+
+  // // Check if the user is authenticated
+  // const user = req.user;
+  // if (!user) {
+  //   return res.status(401).json({ success: false, message: "Unauthorized" });
+  // }
+
+  try {
+    const totalImages = await Image.countDocuments({});
+    const totalPages = Math.ceil(totalImages / per_page);
+    if (page > totalPages) {
+      return res.status(400).json({
+        success: false,
+        message: `Page number exceeds total pages. Total pages: ${totalPages}`,
+      });
+    }
+
+    const images = await Image.find({})
+      .populate("user", "username email -_id") // Populate user field with username and email
+      // .select("-__v") // Exclude __v field from the response
+      .skip(skip)
+      .limit(per_page)
+      .sort(sortObj);
+    if (!images || images.length === 0) {
+      return res
+        .status(404)
+        .json({ success: false, message: "No images found" });
+    }
+    res
+      .status(200)
+      .json({ success: true, page, totalImages, totalPages, images });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: false, message: error });
+  }
+};
+
 const deleteImage = async (req, res) => {
   const { id: imageId } = req.params;
   const user = req.user;
-  if(!user) {
+  if (!user) {
     return res.status(401).json({ message: "Unauthorized! No user found" });
   }
 
@@ -52,11 +118,16 @@ const deleteImage = async (req, res) => {
       return res.status(404).json({ message: "Image not found" });
     }
 
+    console.log(user.id, image.user);
+
     // Check if the user has permission to delete the image
-    checkPermissions(user, image.user);
+    if (!checkPermissions(user, image.user))
+      return res.status(403).json({
+        message: "Forbidden! You don't have permission to access this resource",
+      });
 
     // Delete the image from Cloudinary
-    await upload.destroy(image.public_id);
+    await deleteImageFromCloudinary(image.public_id);
     // Delete the image from the database
     await Image.findByIdAndDelete(imageId);
 
@@ -69,6 +140,8 @@ const deleteImage = async (req, res) => {
 
 module.exports = {
   uploadImage,
+  deleteImage,
+  getAllImages,
 };
 
 /**

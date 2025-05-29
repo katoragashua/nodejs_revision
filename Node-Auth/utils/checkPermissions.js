@@ -4,15 +4,13 @@ const checkPermissions = (currentUser, resourceUserId) => {
     return true;
   }
 
-  if (currentUser.role === "user" && currentUser.id === resourceUserId) {
+  if (currentUser.role === "user" && currentUser.id === resourceUserId.toString()) {
     // Regular users can access their own resources
     return true;
   }
 
   // If no conditions are met, deny access
-  return res.status(403).json({
-    message: "Forbidden! You don't have permission to access this resource",
-  });
+ return false;
 };
 
 // const checkPermissions = (req, res, next) => {

@@ -6,14 +6,24 @@ const {
 } = require("../middlewares/auth_middleware");
 const uploadMiddleware = require("../middlewares/upload_middleware");
 
-const { uploadImage } = require("../controllers/image_controllers");
+const {
+  uploadImage,
+  deleteImage,
+    getAllImages,
+} = require("../controllers/image_controllers");
 
 // Route to upload an image
 router.post(
   "/upload",
- authenticationMiddleware,
+  authenticationMiddleware,
   uploadMiddleware.single("image"),
   uploadImage
 );
+
+// Route to get all images
+router.get("/all",  getAllImages);
+
+// Route to delete an image
+router.delete("/delete/:id", authenticationMiddleware, deleteImage);
 
 module.exports = router;

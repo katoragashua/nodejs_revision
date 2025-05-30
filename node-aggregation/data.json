@@ -1,0 +1,142 @@
+[
+    {
+        "name": "Wireless Headphones",
+        "price": 79.99,
+        "category": "Electronics",
+        "inStock": true,
+        "tags": ["audio", "wireless", "bluetooth"]
+    },
+    {
+        "name": "Gaming Mouse",
+        "price": 49.99,
+        "category": "Accessories",
+        "inStock": true,
+        "tags": ["gaming", "precision", "RGB"]
+    },
+    {
+        "name": "Mechanical Keyboard",
+        "price": 120.50,
+        "category": "Accessories",
+        "inStock": false,
+        "tags": ["gaming", "mechanical", "backlit"]
+    },
+    {
+        "name": "Smart Watch",
+        "price": 199.99,
+        "category": "Wearable Tech",
+        "inStock": true,
+        "tags": ["fitness", "smart", "bluetooth"]
+    },
+    {
+        "name": "USB-C Hub",
+        "price": 29.99,
+        "category": "Accessories",
+        "inStock": true,
+        "tags": ["connectivity", "USB-C", "multiport"]
+    },
+    {
+        "name": "Portable SSD",
+        "price": 150.00,
+        "category": "Storage",
+        "inStock": false,
+        "tags": ["fast", "storage", "portable"]
+    },
+    {
+        "name": "Wireless Charger",
+        "price": 39.99,
+        "category": "Accessories",
+        "inStock": true,
+        "tags": ["wireless", "charger", "Qi"]
+    },
+    {
+        "name": "Bluetooth Speaker",
+        "price": 89.99,
+        "category": "Electronics",
+        "inStock": false,
+        "tags": ["audio", "portable", "wireless"]
+    },
+    {
+        "name": "Laptop Stand",
+        "price": 25.00,
+        "category": "Accessories",
+        "inStock": true,
+        "tags": ["ergonomic", "laptop", "adjustable"]
+    },
+    {
+        "name": "External Monitor",
+        "price": 299.99,
+        "category": "Electronics",
+        "inStock": false,
+        "tags": ["display", "monitor", "IPS"]
+    },
+    {
+        "name": "Noise Cancelling Earbuds",
+        "price": 150.00,
+        "category": "Electronics",
+        "inStock": true,
+        "tags": ["audio", "wireless", "noise cancelling"]
+    },
+    {
+        "name": "Smart Thermostat",
+        "price": 129.99,
+        "category": "Home Automation",
+        "inStock": false,
+        "tags": ["smart", "temperature", "energy saving"]
+    },
+    {
+        "name": "Fitness Tracker",
+        "price": 99.99,
+        "category": "Wearable Tech",
+        "inStock": true,
+        "tags": ["fitness", "tracking", "wearable"]
+    },
+    {
+        "name": "Smart Doorbell",
+        "price": 180.00,
+        "category": "Home Security",
+        "inStock": false,
+        "tags": ["video", "smart", "security"]
+    },
+    {
+        "name": "Electric Toothbrush",
+        "price": 49.99,
+        "category": "Personal Care",
+        "inStock": true,
+        "tags": ["oral care", "smart", "electric"]
+    },
+    {
+        "name": "VR Headset",
+        "price": 250.00,
+        "category": "Gaming",
+        "inStock": false,
+        "tags": ["virtual reality", "gaming", "immersive"]
+    },
+    {
+        "name": "Smart Plug",
+        "price": 30.00,
+        "category": "Home Automation",
+        "inStock": true,
+        "tags": ["smart", "energy saving", "plug"]
+    },
+    {
+        "name": "Dash Cam",
+        "price": 120.00,
+        "category": "Automotive",
+        "inStock": false,
+        "tags": ["camera", "car", "safety"]
+    },
+    {
+        "name": "Graphic Tablet",
+        "price": 200.00,
+        "category": "Creative Tools",
+        "inStock": true,
+        "tags": ["design", "art", "digital"]
+    },
+    {
+        "name": "Mini Projector",
+        "price": 150.00,
+        "category": "Electronics",
+        "inStock": false,
+        "tags": ["portable", "display", "projection"]
+    }
+]
